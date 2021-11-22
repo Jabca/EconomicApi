@@ -12,12 +12,12 @@ def get_yearly_prices(ticker: str, depth=10) -> list:
 
     yearly_prices = []
     ticker = -1
-    for i, row in company_history.iterrows():
+    for timestamp, row in company_history.iterrows():
         ticker += 1
         ticker %= 4
         if ticker % 4 != 0:
             continue
-        yearly_prices.append({"time": i.strftime("%Y-%m-%d"), "price": row.Close})
+        yearly_prices.append({"time": timestamp.strftime("%Y-%m-%d"), "price": row.Close})
 
     return yearly_prices[::-1]
 
