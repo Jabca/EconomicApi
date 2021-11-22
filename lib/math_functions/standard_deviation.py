@@ -1,10 +1,10 @@
-def standard_deviation(yearly_profits: list) -> float:
-    average_profit = 0
-    for i in yearly_profits:
-        average_profit += i["profit"]
-    average_profit /= len(yearly_profits)
+from .averages import average_arithmetic
+
+
+def standard_deviation(profits: list) -> float:
+    average_profit = average_arithmetic(profits)
     tmp = 0
-    for period in yearly_profits:
+    for period in profits:
         tmp += (period["profit"] - average_profit) ** 2
 
-    return (tmp / (len(yearly_profits) - 1)) ** 0.5
+    return (tmp / (len(profits) - 1)) ** 0.5
