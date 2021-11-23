@@ -1,8 +1,9 @@
 from lib.math_functions.standard_deviation import standard_deviation
 from lib.math_functions.averages import average_geometrical, average_arithmetic
 from lib.data_transform.abnormal_returns import get_abnormal_returns
+from lib.data_transform.downside import get_downsides
 
-us_bonds_profits = 0.03
+us_bonds_yearly_profits = 0.03
 
 
 def variation_coefficient(yearly_profits: list) -> float:
@@ -18,6 +19,13 @@ def information_coefficient(profits_y: list, benchmark_profits_y: list, profits_
 
 
 def sharpe_coefficient(profits_y: list) -> float:
-    numerator = average_geometrical(profits_y) - us_bonds_profits
+    numerator = average_geometrical(profits_y) - us_bonds_yearly_profits
     denominator = standard_deviation(profits_y)
     return numerator / denominator
+
+
+def sortino_coefficient(profits_y: list, profit_d: list) -> float:
+    numerator = average_geometrical(profits_y) - us_bonds_yearly_profits
+    denominator = standard_deviation(get_downsides(profit_d)) * 252 ** 0.5
+    return numerator / denominator
+
