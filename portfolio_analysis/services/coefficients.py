@@ -1,7 +1,7 @@
-from lib.math_functions.standard_deviation import standard_deviation
-from lib.math_functions.averages import average_geometrical, average_arithmetic
-from lib.data_transform.abnormal_returns import get_abnormal_returns
-from lib.data_transform.downside import get_downsides
+from portfolio_analysis.math_functions.standard_deviation import standard_deviation
+from portfolio_analysis.math_functions.averages import average_geometrical, average_arithmetic
+from portfolio_analysis.data_transform.abnormal_returns import get_abnormal_returns
+from portfolio_analysis.data_transform.downside import get_downsides
 
 us_bonds_yearly_profits = 0.03
 
