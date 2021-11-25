@@ -13,11 +13,11 @@ Choose conmpany any pass it's ticker as argument
 If you want to specify the amount of years take to account you can add this as keyword argument depth 
 
 ```py
-    from portfoloio_analysis import get_share_info
+from portfoloio_analysis import get_share_info
     
-    ticker = "appl"
-    depth = 5
-    print(get_share_info(ticker, depth=depth))
+ticker = "appl"
+depth = 5
+print(get_share_info(ticker, depth=depth))
 ```
 
 ## Instalation
