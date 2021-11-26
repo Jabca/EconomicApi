@@ -1,3 +1,3 @@
 pandas
-pandas_datareader
 yfinance
+pandas_datareader
