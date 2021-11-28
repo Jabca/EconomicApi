@@ -103,6 +103,7 @@ setup(
                        'portfolio_analysis/data_transform',
                        'portfolio_analysis/math_functions',
                        'portfolio_analysis/services']},
+    include_package_data=True,
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers

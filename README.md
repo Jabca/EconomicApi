@@ -23,7 +23,7 @@ print(get_share_info(ticker, depth=depth))
 ## Instalation
 
 ```sh
-python3 -m pip3 install git+https://github.com/Jabca/EconomicApi
+python3 -m pip install git+https://github.com/Jabca/EconomicApi
 ```
 
 ### Packages
