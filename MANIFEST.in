@@ -1,0 +1,3 @@
+include README.md
+include download_data_files.py
+recursive-include portfolio_analysis *
