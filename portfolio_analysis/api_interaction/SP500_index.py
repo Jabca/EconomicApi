@@ -6,6 +6,8 @@ from typing import Tuple
 
 
 def get_sp500_raw(depth: int) -> Tuple[str, DataFrame]:
+    """return DataFrame of daily S&P 500 index from yesterday to yesterday - depth_in_years"""
+
     today = datetime.today()
     start = today - relativedelta(years=depth)
     end = today

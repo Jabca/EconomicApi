@@ -4,6 +4,8 @@ from pandas import DataFrame
 
 
 def get_yearly_prices(company_history: DataFrame, depth=5) -> list:
+    """get array of yearly prices from pandas DataFrame of daily prices"""
+
     today = datetime.today()
     start = today - relativedelta(years=depth)
     yearly_prices = []
@@ -17,6 +19,8 @@ def get_yearly_prices(company_history: DataFrame, depth=5) -> list:
 
 
 def get_daily_prices(company_history: DataFrame) -> list:
+    """get array of daily prices from pandas DataFrame of daily prices"""
+
     daily_prices = []
     for timestamp, row in company_history.iterrows():
         daily_prices.append({"time": timestamp.strftime("%Y-%m-%d"), "price": row.Close})

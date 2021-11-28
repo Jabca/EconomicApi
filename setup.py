@@ -99,6 +99,10 @@ setup(
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     packages=find_packages(exclude=['tests']),
+    package_data={'': ['portfolio_analysis/api_interaction',
+                       'portfolio_analysis/data_transform',
+                       'portfolio_analysis/math_functions',
+                       'portfolio_analysis/services']},
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers

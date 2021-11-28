@@ -5,6 +5,7 @@ from typing import Tuple
 
 
 def get_raw_prices(ticker: str, depth: int) -> Tuple[str, DataFrame]:
+    """return DataFrame of daily S&P 500 index from yesterday to yesterday - depth_in_years"""
     company = yf.Ticker(ticker)
     today = datetime.today()
     company_history = company.history(start=f"{today.year - depth}-{today.month}-{today.day}",

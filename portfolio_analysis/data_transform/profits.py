@@ -1,4 +1,6 @@
 def get_profits(data: list) -> list:
+    """return array of profits for given period from array of prices"""
+
     profits = []
 
     for i in range(1, len(data)):
