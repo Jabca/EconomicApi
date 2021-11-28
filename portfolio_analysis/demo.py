@@ -8,7 +8,7 @@ from portfolio_analysis.data_transform.profits import get_profits
 from portfolio_analysis.services.coefficients import *
 
 
-def get_share_info(name: str, depth=5) -> dict:
+def demo(name: str, depth=5) -> dict:
     response = dict()
     response["name"] = name
     response["depth"] = depth
@@ -45,5 +45,9 @@ def get_share_info(name: str, depth=5) -> dict:
     return response
 
 
+def main():
+    print(demo("aapl", depth=5))
+
+
 if __name__ == "__main__":
-    print(get_share_info("aapl", depth=5))
+    main()
