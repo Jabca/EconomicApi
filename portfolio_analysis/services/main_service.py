@@ -41,10 +41,22 @@ def share_coefficients(ticker: str, depth=5, benchmark_raw=DataFrame()) -> dict:
     sp500_y = get_profits(get_yearly_prices(sp500_raw, depth=depth))
     sp500_d = get_profits(get_daily_prices(sp500_raw))
 
+    response["sharpe"] = None
+    response["variation"] = None
+    response["information"] = None
+    response["sortino"] = None
+    response["treynor"] = None
+
+    if any(map(lambda z: len(z) == 0, (y_profits, d_profits, inf))):
+        return response
+
     response["sharpe"] = sharpe_ratio(y_profits)
     response["variation"] = variation_ratio(y_profits)
     response["information"] = information_ratio(y_profits, sp500_y, d_profits, sp500_d)
     response["sortino"] = sortino_ratio(y_profits, d_profits)
-    response["treynor"] = treynor_ratio(y_profits, inf["beta"])
+    for key in inf.keys():
+        if "beta" in key and inf[key] is float:
+            response["treynor"] = treynor_ratio(y_profits, inf[key])
+            break
 
     return response
