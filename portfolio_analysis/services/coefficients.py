@@ -4,7 +4,7 @@ from portfolio_analysis.data_transform.abnormal_returns import get_abnormal_retu
 from portfolio_analysis.data_transform.downside import get_downsides
 
 
-"""This file contain functions that calculate coefficients"""
+"""This file contain functions that calculate data_transform"""
 
 
 def variation_ratio(yearly_profits: list) -> float:

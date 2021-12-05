@@ -3,13 +3,13 @@ import concurrent.futures
 from portfolio_analysis.api_interaction.SP500_index import *
 from portfolio_analysis.api_interaction.info import *
 from portfolio_analysis.api_interaction.prices import *
-from portfolio_analysis.data_transform.prices_transfrom import get_daily_prices, get_yearly_prices
+from portfolio_analysis.data_transform.prices_transform import get_daily_prices, get_yearly_prices
 from portfolio_analysis.data_transform.profits import get_profits
 from portfolio_analysis.services.coefficients import *
 
 
 def share_coefficients(ticker: str, depth=5, benchmark_raw=DataFrame()) -> dict:
-    """Returns dictionary of all five coefficients args:
+    """Returns dictionary of all five data_transform args:
         ticker
         depth in years(default=5)
         benchmark_data(by default - sp500 index)"""
