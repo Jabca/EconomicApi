@@ -3,17 +3,15 @@ from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
 
 
-def get_yearly_prices(company_history: DataFrame, depth=5) -> list:
+def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.today()) -> list:
     """get array of yearly prices from pandas DataFrame of daily prices"""
 
-    today = datetime.today()
-    start = today - relativedelta(years=depth)
+    cur_date = test_day - relativedelta(years=depth)
     yearly_prices = []
-    length = len(company_history) - 1
-    for i, (timestamp, row) in enumerate(company_history.iterrows()):
-        if start - timestamp.to_pydatetime() < timedelta(days=3) or i == length:
-            start += relativedelta(years=1)
-            yearly_prices.append({"time": timestamp.strftime("%Y-%m-%d"), "price": row.Close})
+    for _ in range(depth+1):
+        row = company_history.iloc[company_history.index.get_loc(cur_date, method='nearest')]
+        yearly_prices.append({"time": row.name.strftime("%Y-%m-%d"), "price": row.Close})
+        cur_date += relativedelta(years=1)
 
     return yearly_prices[::-1]
 

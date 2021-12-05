@@ -4,7 +4,7 @@ from portfolio_analysis.data_transform.abnormal_returns import get_abnormal_retu
 from portfolio_analysis.data_transform.downside import get_downsides
 
 
-"""This file contain functions that calculate coefficients"""
+"""This file contain functions that calculate data_transform"""
 
 
 def variation_ratio(yearly_profits: list) -> float:
@@ -24,6 +24,7 @@ def information_ratio(profits_y: list, benchmark_profits_y: list, profits_d: lis
 
     numerator = average_geometrical(profits_y) - average_geometrical(benchmark_profits_y)
     denominator = standard_deviation(get_abnormal_returns(profits_d, benchmark_profits_d)) * 252 ** 0.5
+    # raise Exception(numerator, denominator)
     return numerator / denominator
 
 
@@ -51,4 +52,5 @@ def treynor_ratio(profits_y: list, beta_coefficient: float, non_risk_return=0.03
 
     numerator = average_geometrical(profits_y) - non_risk_return
     denominator = beta_coefficient
+
     return numerator / denominator

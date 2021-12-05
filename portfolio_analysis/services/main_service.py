@@ -3,13 +3,13 @@ import concurrent.futures
 from portfolio_analysis.api_interaction.SP500_index import *
 from portfolio_analysis.api_interaction.info import *
 from portfolio_analysis.api_interaction.prices import *
-from portfolio_analysis.data_transform.prices_transfrom import get_daily_prices, get_yearly_prices
+from portfolio_analysis.data_transform.prices_transform import get_daily_prices, get_yearly_prices
 from portfolio_analysis.data_transform.profits import get_profits
 from portfolio_analysis.services.coefficients import *
 
 
 def share_coefficients(ticker: str, depth=5, benchmark_raw=DataFrame()) -> dict:
-    """Returns dictionary of all five coefficients args:
+    """Returns dictionary of all five data_transform args:
         ticker
         depth in years(default=5)
         benchmark_data(by default - sp500 index)"""
@@ -54,8 +54,11 @@ def share_coefficients(ticker: str, depth=5, benchmark_raw=DataFrame()) -> dict:
     response["variation"] = variation_ratio(y_profits)
     response["information"] = information_ratio(y_profits, sp500_y, d_profits, sp500_d)
     response["sortino"] = sortino_ratio(y_profits, d_profits)
+
+
     for key in inf.keys():
-        if "beta" in key and inf[key] is float:
+        if "beta" in key and inf[key] is not None:
+            # print(key, inf[key])
             response["treynor"] = treynor_ratio(y_profits, inf[key])
             break
 
