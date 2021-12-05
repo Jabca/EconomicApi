@@ -6,44 +6,34 @@ import pytest
 from pandas import read_csv
 from pandas import to_datetime
 
-@pytest.fixture()
-def yearly_prices():
+
+def scan_file(name: str, key: str) -> list:
     a = []
-    with open("tests/resources/prices_yearly.csv", newline='') as file:
+    with open(f"tests/resources/{name}", newline='') as file:
         reader = csv.DictReader(file, delimiter=';')
         for row in reader:
-            a.append({"time": row["Date"], "price": float(row["Close"])})
-    return a[::-1]
+            a.append({"time": row["Date"], "price": float(row[key])})
+    return a
+
+
+@pytest.fixture()
+def yearly_prices():
+    return scan_file("prices_yearly.csv", "Close")[::-1]
 
 
 @pytest.fixture()
 def daily_prices():
-    a = []
-    with open("tests/resources/prices_daily.csv", newline='') as file:
-        reader = csv.DictReader(file, delimiter=';')
-        for row in reader:
-            a.append({"time": row["Date"], "price": float(row["Close"])})
-    return a[::-1]
+    return scan_file("prices_daily.csv", "Close")[::-1]
 
 
 @pytest.fixture()
 def sp500_yearly():
-    a = []
-    with open("tests/resources/sp500_yearly.csv", newline='') as file:
-        reader = csv.DictReader(file, delimiter=';')
-        for row in reader:
-            a.append({"time": row["DATE"], "price": float(row["Close"])})
-    return a[::-1]
+    return scan_file("sp500_yearly.csv", "Close")[::-1]
 
 
 @pytest.fixture()
 def sp500_daily():
-    a = []
-    with open("tests/resources/sp500_daily.csv", newline='') as file:
-        reader = csv.DictReader(file, delimiter=';')
-        for row in reader:
-            a.append({"time": row["DATE"], "price": float(row["Close"])})
-    return a[::-1]
+    return scan_file("sp500_yearly.csv", "Close")[::-1]
 
 
 @pytest.fixture()
@@ -52,12 +42,25 @@ def raw_daily():
         res = read_csv(file, sep=';')
     res["Date"] = to_datetime(res["Date"])
     res.set_index("Date", inplace=True)
+
     return res
+
+
+@pytest.fixture()
+def test_profits():
+    data = [0.7, 0.1, 0.0, 0.9, 0.2]
+    t_data = []
+    for i in data:
+        t_data.append({"time": "2021-12-04", "profit": i})
+    return t_data
 
 
 @pytest.fixture()
 def test_day():
     return datetime.datetime(year=2021, month=12, day=2)
+
+
+
 
 
 def compare_dictionaries(d1, d2, price_diff=1e-3):

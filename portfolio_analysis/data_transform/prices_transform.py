@@ -3,11 +3,10 @@ from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
 
 
-def get_yearly_prices(company_history: DataFrame, depth=5) -> list:
+def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.today()) -> list:
     """get array of yearly prices from pandas DataFrame of daily prices"""
 
-    today = datetime.today()
-    cur_date = today - relativedelta(years=depth)
+    cur_date = test_day - relativedelta(years=depth)
     yearly_prices = []
     for _ in range(depth+1):
         row = company_history.iloc[company_history.index.get_loc(cur_date, method='nearest')]

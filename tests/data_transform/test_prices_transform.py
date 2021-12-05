@@ -1,5 +1,5 @@
-from tests.test_app import *
 from portfolio_analysis.data_transform.prices_transform import *
+from tests.test_app import *
 
 
 @pytest.mark.data_transform_op
