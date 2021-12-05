@@ -54,8 +54,11 @@ def share_coefficients(ticker: str, depth=5, benchmark_raw=DataFrame()) -> dict:
     response["variation"] = variation_ratio(y_profits)
     response["information"] = information_ratio(y_profits, sp500_y, d_profits, sp500_d)
     response["sortino"] = sortino_ratio(y_profits, d_profits)
+
+
     for key in inf.keys():
-        if "beta" in key and inf[key] is float:
+        if "beta" in key and inf[key] is not None:
+            # print(key, inf[key])
             response["treynor"] = treynor_ratio(y_profits, inf[key])
             break
 

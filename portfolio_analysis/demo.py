@@ -7,7 +7,7 @@ def demo(name: str, depth=5) -> dict:
 
 
 def main():
-    print(demo("oimwiomr3n", depth=5))
+    print(demo("aapl", depth=3))
 
 
 if __name__ == "__main__":

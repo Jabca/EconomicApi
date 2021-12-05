@@ -32,6 +32,11 @@ def sp500_yearly():
 
 
 @pytest.fixture()
+def sp500_yearly_profits():
+    return scan_file("sp500_yearly_profits.csv", "profit", "profit")[::-1]
+
+
+@pytest.fixture()
 def sp500_daily():
     return scan_file("sp500_yearly.csv", "Close", "price")[::-1]
 
@@ -54,6 +59,11 @@ def daily_downsides():
 @pytest.fixture()
 def abnormal_returns():
     return scan_file("abnormal_returns_daily.csv", "profit", "profit")[::-1]
+
+
+@pytest.fixture()
+def yearly_profits():
+    return scan_file("profits_yearly.csv", "profit", "profit")[::-1]
 
 
 @pytest.fixture()
