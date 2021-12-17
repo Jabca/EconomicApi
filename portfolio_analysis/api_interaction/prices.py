@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Tuple
 
 
-def get_raw_prices(ticker: str, depth: int) -> Tuple[str, DataFrame]:
+def get_raw_prices(ticker: str, depth: int) -> DataFrame:
     """return DataFrame of daily share prices from yesterday to yesterday - depth_in_years"""
     company = yf.Ticker(ticker)
     today = datetime.today()
@@ -12,7 +12,7 @@ def get_raw_prices(ticker: str, depth: int) -> Tuple[str, DataFrame]:
                                       end=f"{today.year}-{today.month}-{today.day}", interval="1d")
     company_history = company_history.dropna(axis=0, how='any', inplace=False)
 
-    return "raw_prices", company_history
+    return company_history
 
 
 
