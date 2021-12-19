@@ -1,38 +1,30 @@
 from typing import List, Dict, Any
-from portfolio_analysis.math_functions.weighted_average import average_weighted
+from portfolio_analysis.math_functions.weighted_sum import weighted_sum
 
 
-def weight_prices(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def weight_sum_of_prices(data) -> List[Dict[str, Any]]:
     """Returns weighted profits of portfolio
     Example of input
-    input = [
-        {"number": 1, "profits":
-            [{"time": "01", "profit": 1}, {"time": "02", "profit": 2}]
-        },
-        {"number": 2, "profits":
-            [{"time": "01", "profit": -1}, {"time": "02", "profit": -2}]
-        }
-    }
+        {"company1_ticker": {"number": 1.0, "company_params": company_params_dict},
+        "company2_ticker": {"number": 2.0, "company_params": company_params_dict}}
     """
     cur_day = []
-    companies = len(data)
-    for comp in range(companies):
-        cur_day.append({"number": data[comp]["number"], "value": 0.0})
+    first_company = list(data.keys())[0]
+    length = len(data[first_company]["company_params"]["d_prices"])
+    days = [d["time"] for d in data[first_company]["company_params"]["d_prices"]]
+    for company in data.keys():
+        cur_day.append({"number": data[company]["number"], "value": 0.0})
 
     result = []
-    for day in range(len(data[0]["profits"])):
-        for comp in range(companies):
-            cur_day[comp]["value"] = data[comp]["profits"][day]["profit"]
+    for day in range(length):
+        i = 0
+        for comp in data.keys():
+            cur_day[i]["value"] = data[comp]["company_params"]["d_prices"][day]["price"]
+            i += 1
 
-        time = data[0]["profits"][day]["time"]
-        profit = average_weighted(cur_day)
-        result.append({"time": time, "profit": profit})
+        time = days[day]
+        profit = weighted_sum(cur_day)
+        result.append({"time": time, "price": profit})
 
     return result
 
-
-p1 = [{"time": "01", "profit": 1}, {"time": "02", "profit": 2}]
-p2 = [{"time": "01", "profit": -1}, {"time": "02", "profit": -2}]
-d = [{"number": 1, "profits": p1}, {"number": 2, "profits": p2}]
-
-print(weight_prices(d))

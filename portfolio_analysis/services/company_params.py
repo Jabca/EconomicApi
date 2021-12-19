@@ -3,11 +3,11 @@ from portfolio_analysis.data_transform.prices_transform import get_daily_prices,
 from portfolio_analysis.data_transform.profits import get_profits
 from portfolio_analysis.api_interaction.prices import *
 
-from typing import Dict, Any
+from typing import Dict, Union, List
 import concurrent.futures
 
 
-def get_company_params(ticker: str, depth=5) -> Dict[str, Any]:
+def get_company_params(ticker: str, depth=5) -> Dict[str, Union[str, str, List[Dict[str, Union[float, str]]]]]:
     with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = list()
         futures.append(executor.submit(get_raw_prices, ticker, depth=depth))
@@ -19,9 +19,6 @@ def get_company_params(ticker: str, depth=5) -> Dict[str, Any]:
             else:
                 raw_prices = t
 
-    y_prices = get_yearly_prices(raw_prices, depth=depth)
-    d_prices = get_daily_prices(raw_prices)
-    y_profits = get_profits(y_prices)
-    d_profits = get_profits(d_prices)
-
-    return {"info": info, "y_profits": y_profits, "d_profits": d_profits}
+    return {"name": ticker, "info": info,
+            "d_prices": get_daily_prices(raw_prices),
+            "y_prices": get_yearly_prices(raw_prices, depth=depth)}
