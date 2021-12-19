@@ -28,5 +28,3 @@ def get_company_params(ticker: str, depth=5) -> CompanyParamsType:
             "d_prices": d_prices,
             "y_prices": y_prices}
 
-
-print(*get_company_params("aapl").values(), sep='\n')

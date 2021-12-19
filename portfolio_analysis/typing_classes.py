@@ -1,4 +1,5 @@
-from typing import TypedDict, List, Dict, Any, Union, Optional
+from typing import TypedDict, List, Dict, Any, Union
+
 from pandas import DataFrame
 
 
@@ -34,7 +35,12 @@ class CompanyPortfolioInfoType(TypedDict):
     company_params: CompanyParamsType
 
 
-class PortfolioInfoType(TypedDict):
+class PortfolioDataType(TypedDict):
     depth: int
     benchmark: Union[None, DataFrame]
     data_sets: Dict[str, CompanyPortfolioInfoType]
+
+
+class PortfolioInfoType(TypedDict):
+    name: str
+    number: float
