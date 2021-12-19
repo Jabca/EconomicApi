@@ -1,4 +1,5 @@
-from typing import Dict, Union, List
+from typing import Dict, Union, List, Optional
+from portfolio_analysis.typing_classes import CompanyParamsType, ResponseType
 
 from pandas import DataFrame
 
@@ -8,8 +9,8 @@ from portfolio_analysis.data_transform.profits import get_profits
 from portfolio_analysis.services.coefficients import *
 
 
-def company_coefficients(company_params: Dict[str, Union[str, dict, List[Dict[str, Union[str, float]]]]], depth=5,
-                         benchmark_raw=DataFrame()) -> Dict[str, Union[str, int, float]]:
+def company_coefficients(company_params: CompanyParamsType, depth=5,
+                         benchmark_raw=DataFrame()) -> ResponseType:
     """Returns dictionary of company coefficients(by default benchmark = sp500)"""
 
     response = dict()

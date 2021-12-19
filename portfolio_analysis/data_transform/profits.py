@@ -1,4 +1,8 @@
-def get_profits(data: list) -> list:
+from portfolio_analysis.typing_classes import PriceType, ProfitType
+from typing import List
+
+
+def get_profits(data: List[PriceType]) -> List[ProfitType]:
     """return array of profits for given period from array of prices"""
 
     profits = []

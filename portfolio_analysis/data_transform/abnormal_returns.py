@@ -1,4 +1,8 @@
-def get_abnormal_returns(profits: list, benchmark_profits: list) -> list:
+from portfolio_analysis.typing_classes import ProfitType
+from typing import List
+
+
+def get_abnormal_returns(profits: List[ProfitType], benchmark_profits: List[ProfitType]) -> List[ProfitType]:
     """return array of difference between profits of share and benchmark.
         args:
             array of share profits,

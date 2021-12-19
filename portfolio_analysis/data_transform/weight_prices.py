@@ -1,9 +1,10 @@
 from typing import List, Dict, Any
 from portfolio_analysis.math_functions.weighted_sum import weighted_sum
+from portfolio_analysis.typing_classes import CompanyPortfolioInfoType, PriceType
 
 
-def weight_sum_of_prices(data) -> List[Dict[str, Any]]:
-    """Returns weighted profits of portfolio
+def weight_sum_of_prices(data: Dict[str, CompanyPortfolioInfoType]) -> List[PriceType]:
+    """Returns weighted sum of portfolio prices for every day
     Example of input
         {"company1_ticker": {"number": 1.0, "company_params": company_params_dict},
         "company2_ticker": {"number": 2.0, "company_params": company_params_dict}}

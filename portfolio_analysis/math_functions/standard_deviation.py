@@ -1,7 +1,9 @@
 from .averages import average_arithmetic
+from typing import List
+from portfolio_analysis.typing_classes import ProfitType
 
 
-def standard_deviation(profits: list) -> float:
+def standard_deviation(profits: List[ProfitType]) -> float:
     average_profit = average_arithmetic(profits)
     tmp = 0
     for period in profits:

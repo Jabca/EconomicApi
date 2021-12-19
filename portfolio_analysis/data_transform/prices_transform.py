@@ -3,8 +3,11 @@ from datetime import timedelta, datetime
 from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
 
+from typing import List
+from portfolio_analysis.typing_classes import PriceType
 
-def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.today()) -> list:
+
+def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.today()) -> List[PriceType]:
     """get array of yearly prices from pandas DataFrame of daily prices"""
 
     cur_date = test_day - relativedelta(years=depth)
@@ -17,7 +20,7 @@ def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.tod
     return yearly_prices[::-1]
 
 
-def get_yearly_prices_from_array(company_history: list, depth=5, test_day=datetime.today()) -> list:
+def get_yearly_prices_from_array(company_history: List[PriceType], depth=5, test_day=datetime.today()) -> List[PriceType]:
     today = test_day
     start = today
     yearly_prices = []
@@ -35,8 +38,10 @@ def get_yearly_prices_from_array(company_history: list, depth=5, test_day=dateti
     return yearly_prices
 
 
-def get_daily_prices(company_history: DataFrame) -> list:
-    """get array of daily prices from pandas DataFrame of daily prices"""
+def get_daily_prices(company_history: DataFrame) -> List[PriceType]:
+    """get array of daily prices from pandas DataFrame of daily prices
+    :rtype: object
+    """
 
     daily_prices = []
     for timestamp, row in company_history.iterrows():

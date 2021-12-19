@@ -1,12 +1,14 @@
 import concurrent.futures
+from typing import Dict
 
-from portfolio_analysis import company_coefficients
+from portfolio_analysis.typing_classes import PortfolioInfoType, ResponseType
 from portfolio_analysis.api_interaction.SP500_index import get_sp500_raw
 from portfolio_analysis.data_transform.prices_transform import get_yearly_prices_from_array
 from portfolio_analysis.data_transform.weight_prices import weight_sum_of_prices
+from portfolio_analysis.services import company_coefficients
 
 
-def portfolio_coefficients(portfolio_info):
+def portfolio_coefficients(portfolio_info: PortfolioInfoType) -> Dict[str, ResponseType]:
     """Example input:
         {"depth": 5,
         "data_sets" :{
