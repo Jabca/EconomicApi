@@ -1,13 +1,15 @@
-from portfolio_analysis.math_functions.standard_deviation import standard_deviation
-from portfolio_analysis.math_functions.averages import average_geometrical, average_arithmetic
+from typing import List
+
+from portfolio_analysis.typing_classes import ProfitType
 from portfolio_analysis.data_transform.abnormal_returns import get_abnormal_returns
 from portfolio_analysis.data_transform.downside import get_downsides
-
+from portfolio_analysis.math_functions.averages import average_geometrical, average_arithmetic
+from portfolio_analysis.math_functions.standard_deviation import standard_deviation
 
 """This file contain functions that calculate data_transform"""
 
 
-def variation_ratio(yearly_profits: list) -> float:
+def variation_ratio(yearly_profits: List[ProfitType]) -> float:
     """calculate variation ratio based on array of yearly profits"""
 
     numerator = standard_deviation(yearly_profits)
@@ -15,7 +17,8 @@ def variation_ratio(yearly_profits: list) -> float:
     return numerator / denominator
 
 
-def information_ratio(profits_y: list, benchmark_profits_y: list, profits_d: list, benchmark_profits_d: list) -> float:
+def information_ratio(profits_y: List[ProfitType], benchmark_profits_y: List[ProfitType], profits_d: List[ProfitType],
+                      benchmark_profits_d: List[ProfitType]) -> float:
     """calculate information ratio based on arrays of:
         share yearly profits,
         benchmark yearly profits,
@@ -24,18 +27,17 @@ def information_ratio(profits_y: list, benchmark_profits_y: list, profits_d: lis
 
     numerator = average_geometrical(profits_y) - average_geometrical(benchmark_profits_y)
     denominator = standard_deviation(get_abnormal_returns(profits_d, benchmark_profits_d)) * 252 ** 0.5
-    # raise Exception(numerator, denominator)
     return numerator / denominator
 
 
-def sharpe_ratio(profits_y: list, non_risk_return=0.03) -> float:
+def sharpe_ratio(profits_y: List[ProfitType], non_risk_return=0.03) -> float:
     """calculate sharpe ratio based on array of yearly profits"""
     numerator = average_geometrical(profits_y) - non_risk_return
     denominator = standard_deviation(profits_y)
     return numerator / denominator
 
 
-def sortino_ratio(profits_y: list, profit_d: list, non_risk_return=0.03) -> float:
+def sortino_ratio(profits_y: List[ProfitType], profit_d: List[ProfitType], non_risk_return=0.03) -> float:
     """calculate sortino ratio based on arrays of
         share yearly profits,
         share daily profits"""
@@ -45,7 +47,7 @@ def sortino_ratio(profits_y: list, profit_d: list, non_risk_return=0.03) -> floa
     return numerator / denominator
 
 
-def treynor_ratio(profits_y: list, beta_coefficient: float, non_risk_return=0.03):
+def treynor_ratio(profits_y: List[ProfitType], beta_coefficient: float, non_risk_return=0.03):
     """calculate treynor ratio based on:
             array of share yearly profits,
             share beta coefficient  """
