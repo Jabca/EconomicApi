@@ -9,17 +9,12 @@ This api can provide you with 5 coefficints to analyze your stock portfolio.
 
 ## To seee in action
 
-Choose conmpany any pass it's ticker as argument
-If you want to specify the amount of years take to account you can add this as keyword argument depth 
-
 ```py
 from portfoloio_analysis.demo import demo
     
-ticker = "appl"
-depth = 5
-print(demo(ticker, depth=depth))
+demo()
 ```
-
+To use it check portfolio_analysis.demo.py
 ## Instalation
 
 ```sh
