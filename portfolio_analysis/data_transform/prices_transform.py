@@ -29,7 +29,7 @@ def get_yearly_prices_from_array(company_history: List[PriceType], depth=5, test
     while i < length and len(yearly_prices) != depth+1:
         time = company_history[i]["time"]
         timestamp = datetime.strptime(time[2:], "%y-%m-%d")
-        if timestamp == start or timestamp - start < timedelta(days=0) or i == length-1:
+        if timestamp - start <= timedelta(days=0) or i == length-1:
             start -= relativedelta(years=1)
             price = company_history[i]["price"]
             yearly_prices.append({"time": time, "price": price})

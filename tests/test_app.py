@@ -18,47 +18,37 @@ def scan_file(name: str, key_row: str, key_col) -> list:
 
 @pytest.fixture()
 def yearly_prices():
-    return scan_file("prices_yearly.csv", "Close", "price")[::-1]
+    return scan_file("prices_yearly.csv", "price", "price")[::-1]
+
+
+@pytest.fixture()
+def yearly_prices_2():
+    return scan_file("prices_yearly_2.csv", "price", "price")[::-1]
+
+
+@pytest.fixture()
+def weighted_prices():
+    return scan_file("prices_weighted.csv", "price", "price")[::-1]
 
 
 @pytest.fixture()
 def daily_prices():
-    return scan_file("prices_daily.csv", "Close", "price")[::-1]
-
-
-@pytest.fixture()
-def sp500_yearly():
-    return scan_file("sp500_yearly.csv", "Close", "price")[::-1]
-
-
-@pytest.fixture()
-def sp500_yearly_profits():
-    return scan_file("sp500_yearly_profits.csv", "profit", "profit")[::-1]
-
-
-@pytest.fixture()
-def sp500_daily():
-    return scan_file("sp500_yearly.csv", "Close", "price")[::-1]
-
-
-@pytest.fixture()
-def sp500_daily_profits():
-    return scan_file("sp500_daily_profits.csv", "profit", "profit")[::-1]
+    return scan_file("prices_daily.csv", "price", "price")[::-1]
 
 
 @pytest.fixture()
 def daily_profits():
-    return scan_file("profits_daily.csv", "profit", "profit")[::-1]
+    return scan_file("profits_yearly.csv", "profit", "profit")[::-1]
 
 
 @pytest.fixture()
 def daily_downsides():
-    return scan_file("downsides_daily.csv", "profit", "profit")[::-1]
+    return scan_file("profits_downside.csv", "profit", "profit")[::-1]
 
 
 @pytest.fixture()
 def abnormal_returns():
-    return scan_file("abnormal_returns_daily.csv", "profit", "profit")[::-1]
+    return scan_file("profits_abnormal_return.csv", "profit", "profit")[::-1]
 
 
 @pytest.fixture()
@@ -67,8 +57,13 @@ def yearly_profits():
 
 
 @pytest.fixture()
+def yearly_profits_2():
+    return scan_file("profits_yearly_2.csv", "profit", "profit")[::-1]
+
+
+@pytest.fixture()
 def raw_daily():
-    with open("tests/resources/prices_daily.csv") as file:
+    with open("tests/resources/prices_daily_raw.csv") as file:
         res = read_csv(file, sep=';')
     res["Date"] = to_datetime(res["Date"])
     res.set_index("Date", inplace=True)
@@ -87,11 +82,10 @@ def test_profits():
 
 @pytest.fixture()
 def test_day():
-    return datetime.datetime(year=2021, month=12, day=2)
+    return datetime.datetime(year=2021, month=12, day=20)
 
 
 def compare_dictionaries(d1, d2, price_diff=1e-3, key="price"):
     for c1, c2 in zip(d1, d2):
         assert (abs(c1[key] - c2[key]) < price_diff)
         assert (c1["time"] == c2["time"])
-
