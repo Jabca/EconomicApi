@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>797</width>
-    <height>608</height>
+    <width>807</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>10</y>
       <width>751</width>
       <height>551</height>
@@ -27,9 +27,9 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="submit_button">
+        <widget class="QPushButton" name="update_button">
          <property name="text">
-          <string>Submit</string>
+          <string>Update</string>
          </property>
         </widget>
        </item>
@@ -53,17 +53,31 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="submit_button">
+         <property name="text">
+          <string>Submit</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QTableView" name="portfolio_coeffs"/>
+        <widget class="QTableView" name="coefficients_table">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QListView" name="companies_list">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -83,7 +97,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>797</width>
+     <width>807</width>
      <height>22</height>
     </rect>
    </property>
