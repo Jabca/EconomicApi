@@ -3,7 +3,8 @@ from portfolio_analysis import portfolio_coefficients
 
 
 class Portfolio:
-    def __init__(self, portfolio_info=None):
+    def __init__(self, portfolio_info=None, depth=5):
+        self.depth=depth
         if portfolio_info is None:
             self.portfolio_info = list()
         else:
@@ -15,7 +16,7 @@ class Portfolio:
         self.portfolio_coefficients = portfolio_coefficients(self.portfolio_data)
 
     def update_data(self):
-        self.portfolio_info = form_portfolio_data(self.portfolio_info)
+        self.portfolio_data = form_portfolio_data(self.portfolio_info, self.depth)
 
     def full_update(self):
         self.update_data()
@@ -30,11 +31,9 @@ class Portfolio:
         return \
             self.portfolio_data["data_sets"][name]["company_params"]["info"]["logo_url"]
 
-
     def delete_company(self, name):
         for el in self.portfolio_info:
             if el["name"] == name:
                 self.portfolio_info.remove(el)
                 return None
         return "Company not in portfolio"
-
