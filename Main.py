@@ -1,12 +1,18 @@
-from PyQt5 import QtWidgets, uic
 import sys
 
-class Ui(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(Ui, self).__init__()
-        uic.loadUi('gui/main_window.ui', self)
-        self.show()
+from PyQt5 import QtWidgets, uic
 
-app = QtWidgets.QApplication(sys.argv)
-window = Ui()
-app.exec_()
+from gui import MainWindow
+
+import requests_cache
+
+requests_cache.install_cache('requests_cache')
+
+example_portfolio = [{"name": "aapl", "number": 1.0},
+                     {"name": "goog", "number": 0.5}]
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
