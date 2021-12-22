@@ -58,7 +58,7 @@ class TableModel(QtCore.QAbstractTableModel):
             if value is None:
                 return '--'
             if isinstance(value, float):
-                return "%.4f" % value
+                return "%.2f" % value
             if isinstance(value, str):
                 return '"%s"' % value
         elif role == Qt.BackgroundRole:

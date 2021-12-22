@@ -7,7 +7,15 @@ This api can provide you with 5 coefficints to analyze your stock portfolio.
 - Sortino coefficient
 - Treynor ratio
 
-## To seee in action
+## Gui
+Simply download archive and unzip to desired folder
+
+```shell
+cd ~/path_to_folder
+python3 Main.py
+```
+
+## To see api in action
 
 ```py
 from portfoloio_analysis.demo import demo
@@ -27,6 +35,8 @@ python3 -m pip install git+https://github.com/Jabca/EconomicApi
 - pandas - data analysis
 - pandas_datareader - benchmark history
 - pytest - unit tests
+- pyqt5 - gui
+- requests_cache - requests cache for gui
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
