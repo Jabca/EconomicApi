@@ -27,7 +27,8 @@ def form_portfolio_data(portfolio_info: List[PortfolioInfoType], depth=5) -> Por
 
         for future in concurrent.futures.as_completed(futures):
             res = future.result()
-            resp["data_sets"][res["name"]] = {"number": tmp_dict[res["name"]], "company_params": res}
+            if res is not None:
+                resp["data_sets"][res["name"]] = {"number": tmp_dict[res["name"]], "company_params": res}
 
     return resp
 

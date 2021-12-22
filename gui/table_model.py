@@ -1,5 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
 
 
 class TableModel(QtCore.QAbstractTableModel):
@@ -12,6 +13,16 @@ class TableModel(QtCore.QAbstractTableModel):
         for i, header in enumerate(headers):
             self.setHeaderData(i, Qt.Horizontal, header)
         self._data = data
+        self.green = QColor(79, 205, 197)
+        self.yellow = QColor(255, 182, 72)
+        self.red = QColor(226, 83, 83)
+        self.column_color_info = [
+            [[0.4, 0.6], [self.red, self.yellow, self.green]],
+            [[1.5, 2.0], [self.green, self.yellow, self.red]],
+            [[-0.2, 0.5], [self.red, self.yellow, self.green]],
+            [[0.6, 1], [self.red, self.yellow, self.green]],
+            [[0.1, 0.2], [self.red, self.yellow, self.green]]
+        ]
 
     def setHeaderData(self, section, orientation, data, role=Qt.EditRole):
         if orientation == Qt.Horizontal and role in (Qt.DisplayRole, Qt.EditRole):
@@ -42,19 +53,23 @@ class TableModel(QtCore.QAbstractTableModel):
         return super().headerData(section, orientation, role)
 
     def data(self, index, role):
+        value = self._data[index.row()][index.column()]
         if role == Qt.DisplayRole:
-            value = self._data[index.row()][index.column()]
             if value is None:
-
                 return '--'
-
             if isinstance(value, float):
-
                 return "%.4f" % value
-
             if isinstance(value, str):
-
                 return '"%s"' % value
+        elif role == Qt.BackgroundRole:
+            if isinstance(value, float):
+                return self.pick_color(index.column(), value)
+
+    def pick_color(self, column, value):
+        for i in range(len(self.column_color_info[column][0])):
+            if self.column_color_info[column][0][i] >= value:
+                return self.column_color_info[column][1][i]
+        return self.column_color_info[column][1][-1]
 
     def set_data(self, coeffs):
         self._data.clear()

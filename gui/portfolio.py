@@ -14,6 +14,8 @@ class Portfolio:
 
     def update_coefficients(self):
         p_c = portfolio_coefficients(self.portfolio_data)
+        if p_c is None:
+            return None
         self.portfolio_coefficients.clear()
         self.portfolio_coefficients.append(p_c["portfolio"])
         p_c.pop("portfolio")
@@ -35,6 +37,12 @@ class Portfolio:
         if name in [el["name"] for el in self.portfolio_info]:
             return "Already in portfolio"
         self.portfolio_info.append({"name": name, "number": number})
+
+    def company_in_data(self, name):
+        for key in self.portfolio_data["data_sets"]:
+            if key == name:
+                return True
+        return False
 
     def get_logo_url(self, name: str):
         return \

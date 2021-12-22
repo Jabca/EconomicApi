@@ -36,8 +36,12 @@ class MainWindow(QtWidgets.QMainWindow):
     def add_company_from_form(self):
         name = self.line_edit.text()
         number = self.doubleSpinBox.value()
-        self.portfolio.add_company(name, number)
+        if self.portfolio.add_company(name, number) is not None:
+            return None
         self.portfolio.full_update()
+        if not self.portfolio.company_in_data(name):
+            self.portfolio.delete_company(name)
+            return None
         print(f"{name} added")
         it = QtGui.QStandardItem(f"Name: {name}\nNumber: {str(number)}")
         self.list_model.appendRow(it)
@@ -75,12 +79,12 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.portfolio.full_update()
                 self.list_model.removeRow(index.row())
                 self.update_table()
-                print(f"{name} deleted")
+
             elif value["function"] == "update":
                 item.setText(f'Name: {name}\nNumber: {str(value["number"])}')
                 self.portfolio.update_item(name, value["number"])
                 self.portfolio.full_update()
                 self.update_table()
-                print(f"{name} updated")
+
 
 
