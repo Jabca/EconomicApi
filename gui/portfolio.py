@@ -10,10 +10,15 @@ class Portfolio:
         else:
             self.portfolio_info = portfolio_info
         self.portfolio_data = dict()
-        self.portfolio_coefficients = dict()
+        self.portfolio_coefficients = []
 
     def update_coefficients(self):
-        self.portfolio_coefficients = portfolio_coefficients(self.portfolio_data)
+        p_c = portfolio_coefficients(self.portfolio_data)
+        self.portfolio_coefficients.clear()
+        self.portfolio_coefficients.append(p_c["portfolio"])
+        p_c.pop("portfolio")
+        for el in sorted(list(p_c.values()), key=lambda z: z["sharpe"], reverse=True):
+            self.portfolio_coefficients.append(el)
 
     def update_data(self):
         self.portfolio_data = form_portfolio_data(self.portfolio_info, self.depth)

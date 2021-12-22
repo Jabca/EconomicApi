@@ -29,7 +29,14 @@
        <item>
         <widget class="QPushButton" name="update_button">
          <property name="text">
-          <string>Update</string>
+          <string>Update table</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>insert token</string>
          </property>
         </widget>
        </item>
@@ -40,6 +47,13 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Iinsert number of shares:</string>
          </property>
         </widget>
        </item>
@@ -56,7 +70,7 @@
        <item>
         <widget class="QPushButton" name="submit_button">
          <property name="text">
-          <string>Submit</string>
+          <string>Add company</string>
          </property>
         </widget>
        </item>
@@ -71,6 +85,12 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="showGrid">
+          <bool>false</bool>
+         </property>
+         <property name="gridStyle">
+          <enum>Qt::DashLine</enum>
          </property>
         </widget>
        </item>

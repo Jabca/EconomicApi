@@ -9,7 +9,8 @@ from portfolio_analysis.typing_classes import PriceType
 
 def get_yearly_prices(company_history: DataFrame, depth=5, test_day=datetime.today()) -> List[PriceType]:
     """get array of yearly prices from pandas DataFrame of daily prices"""
-
+    test_day = datetime(year=test_day.year, month=test_day.month, day=test_day.day,
+                        hour=0, minute=0, microsecond=0, second=0)
     cur_date = test_day - relativedelta(years=depth)
     yearly_prices = []
     for _ in range(depth + 1):
