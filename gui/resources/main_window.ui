@@ -27,13 +27,6 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="update_button">
-         <property name="text">
-          <string>Update table</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label">
          <property name="text">
           <string>insert token</string>
@@ -64,6 +57,9 @@
          </property>
          <property name="minimum">
           <double>0.001000000000000</double>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
          </property>
         </widget>
        </item>

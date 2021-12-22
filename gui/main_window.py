@@ -4,6 +4,7 @@ from requests import get
 
 from gui.portfolio import Portfolio
 from gui.table_model import TableModel
+from gui.dialog_box import EditDialog
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -21,7 +22,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.companies_list.setModel(self.list_model)
         self.coefficients_table.setModel(self.table_model)
         self.submit_button.clicked.connect(self.add_company_from_form)
-        self.update_button.clicked.connect(self.update_table)
+        # self.update_button.clicked.connect(self.update_table)
+        self.companies_list.doubleClicked.connect(self.on_edit)
 
         header = self.coefficients_table.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
@@ -51,6 +53,31 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pixmap = pixmap.scaledToWidth(64)
         it.setData(pixmap, QtCore.Qt.DecorationRole)
+        self.update_table()
 
     def update_table(self):
         self.table_model.set_data(self.portfolio.portfolio_coefficients)
+
+    def on_edit(self, index):
+        item = self.list_model.itemFromIndex(index)
+        text = item.text()
+        text = text.replace("\n", ": ")
+        items = text.split(": ")
+        name = items[1]
+        number = float(items[3])
+        dlg = EditDialog(name, number)
+        return_code = dlg.exec_()
+        if return_code == 0:
+            value = dlg.get_value()
+            if value["function"] == "delete":
+                self.portfolio.delete_company(name)
+                self.portfolio.full_update()
+                self.list_model.removeRow(index.row())
+                print(f"{name} deleted")
+            elif value["function"] == "update":
+                item.setText(f"Name: {name}\nNumber: {str(number)}")
+                self.portfolio.update_item(name, value["number"])
+                self.portfolio.full_update()
+                print(f"{name} updated")
+
+

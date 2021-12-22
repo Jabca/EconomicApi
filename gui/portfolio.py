@@ -24,6 +24,10 @@ class Portfolio:
         self.portfolio_data = form_portfolio_data(self.portfolio_info, self.depth)
 
     def full_update(self):
+        if len(self.portfolio_info) == 0:
+            self.portfolio_data = dict()
+            self.portfolio_coefficients = []
+            return None
         self.update_data()
         self.update_coefficients()
 
@@ -42,3 +46,10 @@ class Portfolio:
                 self.portfolio_info.remove(el)
                 return None
         return "Company not in portfolio"
+
+    def update_item(self, name, number):
+        for el in self.portfolio_info:
+            if el["name"] == name:
+                el["number"] = number
+                break
+
