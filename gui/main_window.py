@@ -24,6 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.submit_button.clicked.connect(self.add_company_from_form)
         # self.update_button.clicked.connect(self.update_table)
         self.companies_list.doubleClicked.connect(self.on_edit)
+        self.companies_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
         header = self.coefficients_table.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
@@ -73,11 +74,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.portfolio.delete_company(name)
                 self.portfolio.full_update()
                 self.list_model.removeRow(index.row())
+                self.update_table()
                 print(f"{name} deleted")
             elif value["function"] == "update":
-                item.setText(f"Name: {name}\nNumber: {str(number)}")
+                item.setText(f'Name: {name}\nNumber: {str(value["number"])}')
                 self.portfolio.update_item(name, value["number"])
                 self.portfolio.full_update()
+                self.update_table()
                 print(f"{name} updated")
 
 
