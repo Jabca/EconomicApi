@@ -2,9 +2,9 @@ import requests.exceptions
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from requests import get
 
+from gui.dialog_box import EditDialog
 from gui.portfolio import Portfolio
 from gui.table_model import TableModel
-from gui.dialog_box import EditDialog
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -27,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.companies_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.update_button.clicked.connect(self.update)
         self.depth_years.valueChanged.connect(self.update_depth)
+        self.setWindowTitle("Stock company coefficients")
 
         header = self.coefficients_table.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
@@ -34,7 +35,6 @@ class MainWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
-
 
     def add_company_from_form(self):
         name = self.line_edit.text()
@@ -101,6 +101,3 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.portfolio.update_item(name, value["number"])
                 self.portfolio.full_update()
                 self.update_table()
-
-
-
