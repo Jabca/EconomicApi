@@ -1,3 +1,5 @@
 pandas
 yfinance
 pandas_datareader
+pyqt5
+requests_cache

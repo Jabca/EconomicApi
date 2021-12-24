@@ -1,14 +1,14 @@
 import concurrent.futures
-from typing import Dict
+from typing import Dict, Union
 
-from portfolio_analysis.typing_classes import PortfolioDataType, ResponseType
 from portfolio_analysis.api_interaction.SP500_index import get_sp500_raw
 from portfolio_analysis.data_transform.prices_transform import get_yearly_prices_from_array
 from portfolio_analysis.data_transform.weight_prices import weight_sum_of_prices
 from portfolio_analysis.services.company_coefficients import company_coefficients
+from portfolio_analysis.typing_classes import PortfolioDataType, ResponseType
 
 
-def portfolio_coefficients(portfolio_data: PortfolioDataType) -> Dict[str, ResponseType]:
+def portfolio_coefficients(portfolio_data: PortfolioDataType) -> Union[None, Dict[str, ResponseType]]:
     """Example input:
         {"depth": 5,
         "data_sets" :{
@@ -18,11 +18,11 @@ def portfolio_coefficients(portfolio_data: PortfolioDataType) -> Dict[str, Respo
         or prices_dict(if tou want to use smt else as benchmark)}
     """
 
+    if len(portfolio_data["data_sets"]) == 0:
+        return None
     depth = portfolio_data["depth"]
     if portfolio_data["benchmark"] is None:
         portfolio_data["benchmark"] = get_sp500_raw(depth=depth)
-
-    portfolio_data["benchmark"]
 
     portfolio_d_prices = weight_sum_of_prices(portfolio_data["data_sets"])
     p_data = dict()
@@ -49,6 +49,3 @@ def portfolio_coefficients(portfolio_data: PortfolioDataType) -> Dict[str, Respo
             response[res["name"]] = res
 
     return response
-
-
-

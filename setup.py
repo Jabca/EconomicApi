@@ -16,7 +16,9 @@ VERSION = '0.3'
 REQUIRED = [
     "pandas",
     "pandas_datareader",
-    "yfinance"
+    "yfinance",
+    "requests_cache",
+    "pyqt5"
 ]
 
 # What packages are optional?
