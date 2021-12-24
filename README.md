@@ -8,6 +8,8 @@ This api can provide you with 5 coefficints to analyze your stock portfolio.
 - Treynor ratio
 
 ## Gui
+
+### Installation
 Simply download archive and unzip to desired folder
 
 ```shell
@@ -15,7 +17,10 @@ cd ~/path_to_folder
 python3 Main.py
 ```
 
+###![alt text](https://github.com/Jabca/EconomicApi/blob/master/gui/resources/gui_exp.png?raw=true)
 ## To see api in action
+
+
 
 ```py
 from portfoloio_analysis.demo import demo

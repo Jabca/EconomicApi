@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Triangular</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
@@ -27,16 +33,36 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="open_portfolio_button">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Open portfolio</string>
+          <string>Depth:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="depth_years">
+         <property name="minimum">
+          <number>2</number>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="update_button">
+         <property name="text">
+          <string>update</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>insert token</string>
+          <string>Insert token</string>
          </property>
         </widget>
        </item>
@@ -53,7 +79,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Iinsert number of shares:</string>
+          <string>Number of shares</string>
          </property>
         </widget>
        </item>
@@ -73,7 +99,7 @@
        <item>
         <widget class="QPushButton" name="submit_button">
          <property name="text">
-          <string>Add company</string>
+          <string>Add</string>
          </property>
         </widget>
        </item>

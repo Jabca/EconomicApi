@@ -4,7 +4,7 @@ from portfolio_analysis import portfolio_coefficients
 
 class Portfolio:
     def __init__(self, portfolio_info=None, depth=5):
-        self.depth=depth
+        self.depth = depth
         if portfolio_info is None:
             self.portfolio_info = list()
         else:
@@ -60,4 +60,3 @@ class Portfolio:
             if el["name"] == name:
                 el["number"] = number
                 break
-

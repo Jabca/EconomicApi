@@ -25,6 +25,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.update_button.clicked.connect(self.update_table)
         self.companies_list.doubleClicked.connect(self.on_edit)
         self.companies_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.update_button.clicked.connect(self.update)
+        self.depth_years.valueChanged.connect(self.update_depth)
 
         header = self.coefficients_table.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
@@ -32,6 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+
 
     def add_company_from_form(self):
         name = self.line_edit.text()
@@ -42,7 +45,6 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.portfolio.company_in_data(name):
             self.portfolio.delete_company(name)
             return None
-        print(f"{name} added")
         it = QtGui.QStandardItem(f"Name: {name}\nNumber: {str(number)}")
         self.list_model.appendRow(it)
         try:
@@ -52,16 +54,30 @@ class MainWindow(QtWidgets.QMainWindow):
             pixmap.loadFromData(image)
         except requests.exceptions.MissingSchema:
             pixmap = QtGui.QPixmap("gui/resources/placeholder.png")
-
         if pixmap.height() > pixmap.width():
             pixmap = pixmap.scaledToHeight(64)
         else:
             pixmap = pixmap.scaledToWidth(64)
         it.setData(pixmap, QtCore.Qt.DecorationRole)
         self.update_table()
+        self.line_edit.clear()
+        print(f"{name} added")
 
     def update_table(self):
         self.table_model.set_data(self.portfolio.portfolio_coefficients)
+        print("table updated")
+
+    def update(self) -> None:
+        self.portfolio.full_update()
+        self.update_table()
+        print("full update")
+
+    def update_depth(self):
+        self.portfolio.depth = self.depth_years.value()
+
+    def keyPressEvent(self, event):
+        if event.key() == 16777220:
+            self.add_company_from_form()
 
     def on_edit(self, index):
         item = self.list_model.itemFromIndex(index)
