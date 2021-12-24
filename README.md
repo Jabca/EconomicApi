@@ -18,6 +18,9 @@ python3 Main.py
 ```
 
 ###![alt text](https://github.com/Jabca/EconomicApi/blob/master/gui/resources/gui_exp.png?raw=true)
+-To add company type it's token, number
+-Press Add button or type press Enter
+
 ## To see api in action
 
 
