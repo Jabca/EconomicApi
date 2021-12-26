@@ -39,8 +39,8 @@ def company_coefficients(company_params: CompanyParamsType, depth=5,
 
     response["sharpe"] = sharpe_ratio(y_profits)
     response["variation"] = variation_ratio(y_profits)
-    response["information"] = information_ratio(y_profits, benchmark_y, d_profits, benchmark_d)
-    response["sortino"] = sortino_ratio(y_profits, d_profits)
+    response["information"] = information_ratio(y_profits, benchmark_y)
+    response["sortino"] = sortino_ratio(y_profits)
 
     for key in inf.keys():
         if "beta" in key and inf[key] is not None:
