@@ -37,12 +37,7 @@ def daily_prices():
 
 
 @pytest.fixture()
-def daily_profits():
-    return scan_file("profits_yearly.csv", "profit", "profit")[::-1]
-
-
-@pytest.fixture()
-def daily_downsides():
+def yearly_downsides():
     return scan_file("profits_downside.csv", "profit", "profit")[::-1]
 
 

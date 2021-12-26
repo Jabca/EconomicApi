@@ -19,7 +19,7 @@ python3 Main.py
 
 ![alt text](https://github.com/Jabca/EconomicApi/blob/master/gui/resources/gui_exp.png?raw=true)
 -To add company type it's token, number
--Press Add button or type press Enter
+-Press Add button or type Enter
 
 ## To see api in action
 
@@ -31,9 +31,10 @@ If you want to specify the amount of years take to account you can add this as k
 ```py
 from portfoloio_analysis.demo import demo
     
-ticker = "appl"
+example_portfolio = [{"name": "mco", "number": 1.0}, 
+                     {"name": "goog", "number": 0.5}]
 depth = 5
-print(demo(ticker, depth=depth))
+print(demo(example_portfolio, depth=depth))
 ```
 
 ## Instalation

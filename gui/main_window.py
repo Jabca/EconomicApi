@@ -25,16 +25,21 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.update_button.clicked.connect(self.update_table)
         self.companies_list.doubleClicked.connect(self.on_edit)
         self.companies_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.update_button.clicked.connect(self.update)
+        self.update_button.clicked.connect(self.update_data)
         self.depth_years.valueChanged.connect(self.update_depth)
         self.setWindowTitle("Stock company coefficients")
 
-        header = self.coefficients_table.horizontalHeader()
-        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
-        header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
-        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
-        header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
-        header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+        horizontal_header = self.coefficients_table.horizontalHeader()
+        horizontal_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        horizontal_header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        horizontal_header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        horizontal_header.setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
+        horizontal_header.setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)
+
+        vertical_header = self.coefficients_table.verticalHeader()
+        vertical_header.setSectionResizeMode(0, QtWidgets.QHeaderView.Fixed)
+        vertical_header.resizeSection(0, 50)
+
 
     def add_company_from_form(self):
         name = self.line_edit.text()
@@ -65,9 +70,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def update_table(self):
         self.table_model.set_data(self.portfolio.portfolio_coefficients)
-        print("table updated")
 
-    def update(self) -> None:
+    def update_data(self) -> None:
         self.portfolio.full_update()
         self.update_table()
         print("full update")

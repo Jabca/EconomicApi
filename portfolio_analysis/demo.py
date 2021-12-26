@@ -3,18 +3,16 @@ from portfolio_analysis.services.portfolio_coefficients import portfolio_coeffic
 from portfolio_analysis.services.portfolio_data import form_portfolio_data
 
 
-def demo() -> dict:
-    example_portfolio = [{"name": "mco", "number": 1.0}, {"name": "goog", "number": 0.5}]
+def demo(portfolio, depth=5) -> dict:
 
-    data = form_portfolio_data(example_portfolio, depth=5)
-    # print(data["data_sets"]["aapl"]["company_params"]["info"])
-    # print(data)
+    data = form_portfolio_data(portfolio, depth=5)
     resp = portfolio_coefficients(data)
     return resp
 
 
 def main():
-    res = demo()
+    example_portfolio = [{"name": "mco", "number": 1.0}, {"name": "goog", "number": 0.5}]
+    res = demo(example_portfolio)
     for line in res.values():
         print(line)
 
