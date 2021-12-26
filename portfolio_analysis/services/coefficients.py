@@ -17,16 +17,13 @@ def variation_ratio(yearly_profits: List[ProfitType]) -> float:
     return numerator / denominator
 
 
-def information_ratio(profits_y: List[ProfitType], benchmark_profits_y: List[ProfitType], profits_d: List[ProfitType],
-                      benchmark_profits_d: List[ProfitType]) -> float:
+def information_ratio(profits_y: List[ProfitType], benchmark_profits_y: List[ProfitType]) -> float:
     """calculate information ratio based on arrays of:
         share yearly profits,
-        benchmark yearly profits,
-        share daily profits,
-        benchmark daily profits """
+        benchmark yearly profits """
 
     numerator = average_geometrical(profits_y) - average_geometrical(benchmark_profits_y)
-    denominator = standard_deviation(get_abnormal_returns(profits_d, benchmark_profits_d)) * 252 ** 0.5
+    denominator = standard_deviation(get_abnormal_returns(profits_y, benchmark_profits_y))
     return numerator / denominator
 
 
@@ -37,13 +34,12 @@ def sharpe_ratio(profits_y: List[ProfitType], non_risk_return=0.03) -> float:
     return numerator / denominator
 
 
-def sortino_ratio(profits_y: List[ProfitType], profit_d: List[ProfitType], non_risk_return=0.03) -> float:
+def sortino_ratio(profits_y: List[ProfitType], non_risk_return=0.03) -> float:
     """calculate sortino ratio based on arrays of
-        share yearly profits,
-        share daily profits"""
+        share yearly profits"""
 
     numerator = average_geometrical(profits_y) - non_risk_return
-    denominator = standard_deviation(get_downsides(profit_d)) * 252 ** 0.5
+    denominator = standard_deviation(get_downsides(profits_y, non_risk_return))
     return numerator / denominator
 
 
