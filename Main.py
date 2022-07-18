@@ -5,7 +5,9 @@ from PyQt5 import QtWidgets, uic
 from gui import MainWindow
 
 import requests_cache
+import warnings
 
+warnings.filterwarnings('ignore')
 requests_cache.install_cache('requests_cache')
 
 if __name__ == "__main__":

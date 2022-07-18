@@ -39,7 +39,7 @@ def sortino_ratio(profits_y: List[ProfitType], non_risk_return=0.03) -> float:
         share yearly profits"""
 
     numerator = average_geometrical(profits_y) - non_risk_return
-    denominator = standard_deviation(get_downsides(profits_y, non_risk_return))
+    denominator = standard_deviation(get_downsides(profits_y, non_risk_return)) * 252 ** 0.5
     return numerator / denominator
 
 
